@@ -1,0 +1,9 @@
+.env
+data/
+co-predictor-data/
+__pycache__/
+*.pyc
+venv/
+venv311/
+*.joblib
+scripts/
