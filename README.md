@@ -24,10 +24,11 @@ Uses the `@app.agent` decorator to define a streaming processor — not a plain 
 
 ## ML Model
 
-- Algorithm: Random Forest Regressor (100 estimators)
+- Algorithm: Random Forest Classifier (100 estimators)
+- Task: Binary classification — High CO (>2.0 mg/m³) vs Low CO
 - Training split: 80% train / 20% test
-- MAE: 0.27 mg/m³
-- R²: 0.91
+- Accuracy: 0.94
+- F1 Score: 0.93
 - Model file: `model/co_model.pkl`
 - Trained offline in `model/train_model.py`, loaded once at startup in the Faust processor
 
