@@ -1,4 +1,6 @@
 import asyncio
+
+from mode import label
 asyncio.set_event_loop(asyncio.new_event_loop())
 
 import faust
@@ -58,12 +60,14 @@ async def predict(records):
             record = dict(record)
             features = np.array([[record[col] for col in FEATURE_COLS]])
             prediction = model.predict(features)[0]
+            label = "HIGH" if prediction == 1 else "LOW"
             output = {
                 **record,
-                "predicted_CO_mg_m3": round(float(prediction), 4),
+                "predicted_CO_level": label,
+                "predicted_CO_class": int(prediction),
             }
             await predictions_topic.send(value=output)
-            print(f"[PREDICTED] Row {record.get('row_index')} -> CO = {prediction:.4f} mg/m3")
+            print(f"[PREDICTED] Row {record.get('row_index')} -> CO Level: {label}")
         except Exception as e:
             print(f"[ERROR] {e} — skipping record")
 

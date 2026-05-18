@@ -26,4 +26,5 @@ for msg in consumer:
     row = data.get("row_index", "?")
     pred = data.get("predicted_CO_mg_m3", "?")
     temp = data.get("T", "?")
-    print(f"[{ts}] Row {row:>4} | Temp: {temp:>6.1f}°C | Predicted CO: {pred:>7.4f} mg/m³")
+    level = data.get("predicted_CO_level", "?")
+    print(f"[{ts}] Row {row} | Temp: {temp}C | CO Level: {level}")
